@@ -121,7 +121,7 @@ function downloadAndGenerate (template){
     }).start();
     //gitlab.beisencorp.com:ux-cnpm/ux-m-upaas-ui
     //SxhFs/test-cli
-    download('gitlab.beisencorp.com:ux-cnpm/ux-m-upaas-ui',tmp,{ clone: true }, (err) => {
+    download('SxhFs/test-cli',tmp,{ clone: true }, (err) => {
         process.on('exit', () => rm(tmp));
 
         if(err){
