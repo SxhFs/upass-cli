@@ -122,7 +122,7 @@ function downloadAndGenerate (template){
     //gitlab.beisencorp.com:ux-cnpm/ux-m-upaas-ui
     //SxhFs/test-cli
     
-    download('SxhFs/test-cli',tmp,{ clone: true }, (err) => {
+    download('SxhFs/test-cli',tmp,{ clone: clone }, (err) => {
         process.on('exit', () => rm(tmp));
         if(err){
             spinner.text = chalk.red(`Failed to download template ${template}: ${err.message.trim()}`);
