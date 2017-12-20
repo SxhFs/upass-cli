@@ -13,14 +13,14 @@ let generate = require('../lib/generate');
 let utils = require('../lib/utils');
 
 program
-    .usage('<template-name> [project-name]')
-    .option('-c, --clone', 'use git clone')
+    .usage('[project-name]')
+    //.option('-c, --clone', 'use git clone')
 
 program.on('--help', function () {
     console.log('  Examples:');
     console.log();
     console.log(chalk.gray('    # create a new project with an template.'));
-    console.log('    $ upass init dwqs/vue-startup my-project');
+    console.log('    $ upass init my-project');
     console.log();
 });
 
@@ -88,7 +88,7 @@ if(utils.isExist(projectDirPath)){
 
 function go(){
     let isLocalTemplate = utils.isLocalTemplate(projectName);
-    console.log(projectName);
+   
     if(isLocalTemplate){
         let templatePath = path.normalize(path.join(process.cwd(), template));
         if(utils.isExist(templatePath)){
@@ -121,6 +121,7 @@ function downloadAndGenerate (template){
     }).start();
     //gitlab.beisencorp.com:ux-cnpm/ux-m-upaas-ui
     //SxhFs/test-cli
+    
     download('SxhFs/test-cli',tmp,{ clone: clone }, (err) => {
         process.on('exit', () => rm(tmp));
 
@@ -132,7 +133,8 @@ function downloadAndGenerate (template){
         spinner.text = chalk.green(`${template} downloaded success`);
         spinner.succeed();
         console.log();
-
+        console.log(chalk.white(`cd ${template}`));
+        console.log(chalk.white('npm install'));
         generate(projectName,tmp,projectDirPath, (err,msg = "") => {
             if(err){
                 console.log(chalk.red(`Generated error: ${err.message.trim()}`));
