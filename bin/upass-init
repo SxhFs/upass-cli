@@ -122,7 +122,7 @@ function downloadAndGenerate (template){
     //gitlab.beisencorp.com:ux-cnpm/ux-m-upaas-ui
     //SxhFs/test-cli
     
-    download('SxhFs/test-cli',tmp,{ clone: clone }, (err) => {
+    download('SxhFs/test-cli',tmp,{ clone: true }, (err) => {
         process.on('exit', () => rm(tmp));
         if(err){
             spinner.text = chalk.red(`Failed to download template ${template}: ${err.message.trim()}`);
@@ -132,8 +132,7 @@ function downloadAndGenerate (template){
         spinner.text = chalk.green(`${template} downloaded success`);
         spinner.succeed();
         console.log();
-        console.log(chalk.white(`cd ${template}`));
-        console.log(chalk.white('npm install'));
+        
         generate(projectName,tmp,projectDirPath, (err,msg = "") => {
             if(err){
                 console.log(chalk.red(`Generated error: ${err.message.trim()}`));
